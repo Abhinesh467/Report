@@ -4,7 +4,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-				<viz:VizFrame xmlns="sap.viz" id="idStackedChart" vizType="column" height="100%" width="100%" ></viz:VizFrame>		
+				<viz:VizFrame xmlns="sap.viz" id="idStackedChart" vizType="bar" height="100%" width="100%" ></viz:VizFrame>		
 					</content>
 				</Page>
 			</pages>
