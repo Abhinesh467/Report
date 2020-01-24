@@ -1,0 +1,13 @@
+<mvc:View controllerName="com.numeric.TestReport.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+				<viz:VizFrame xmlns="sap.viz" id="idStackedChart" vizType="column" height="100%" width="100%" ></viz:VizFrame>		
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
