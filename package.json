@@ -1,7 +1,7 @@
 {
-  "name": "{fiori-project}",
-  "version": "{v01}",
-  "description": "{SAP Fiori CI/CD}",
+  "name": "fiori-project",
+  "version": "v01",
+  "description": "SAP Fiori CI/CD",
   "private": true,
   "devDependencies": {
     "grunt": "0.4.5",
