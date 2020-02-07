@@ -3,8 +3,8 @@ node {
 		git "https://github.com/Abhinesh467/Report.git"
 		}
 	stage ('Build'){
-    	dir("TestReport") {
-	   sh "mvn clean install"
+  //  	dir("TestReport") {
+//	   sh "mvn clean install"
        }
      }
 }
