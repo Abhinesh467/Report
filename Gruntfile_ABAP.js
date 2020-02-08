@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     // Project specific variables
     var abapDevelopmentUser = process.env.ABAP_DEVELOPMENT_USER;
     var abapDevelopmentPassword = process.env.ABAP_DEVELOPMENT_PASSWORD;
-    var abapDevelopmentServer = process.env.RFC_CONNECTION_PARAMETER;
+    var abapDevelopmentServer = process.env.ABAP_DEVELOPMENT_SERVER;
     var abapDevelopmentInstance = process.env.ABAP_DEVELOPMENT_INSTANCE;
     var abapDevelopmentClient = process.env.ABAP_DEVELOPMENT_CLIENT;
     var abapApplicationName = process.env.ABAP_APPLICATION_NAME;
@@ -34,12 +34,24 @@ module.exports = function(grunt) {
     };
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
+        createTransportRequest: {
+            options: {
+                conn: abapConn,
+                author: abapDevelopmentUser,
+                description: "Commit: " + gitCommit
+            }
+        },
         uploadToABAP: {
             options: {
                 conn: abapConn,
                 zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
                 zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") + "/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
                 codePage: "UTF8"
+            }
+        },
+        releaseTransport: {
+            options: {
+                conn: abapConn
             }
         }
     });
