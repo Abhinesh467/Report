@@ -8,8 +8,8 @@ module.exports = function(grunt) {
     // Project specific variables
     var abapDevelopmentUser = process.env.ABAP_DEVELOPMENT_USER;
     var abapDevelopmentPassword = process.env.ABAP_DEVELOPMENT_PASSWORD;
-    var abapDevelopmentServer = process.env.ABAP_DEVELOPMENT_SERVER;
-    var abapDevelopmentInstance = process.env.SAPINST_USE_HOSTNAME;
+    var abapDevelopmentServer = "192.168.0.57";
+    var abapDevelopmentInstance = process.env.ABAP_DEVELOPMENT_INSTANCE;
     var abapDevelopmentClient = process.env.ABAP_DEVELOPMENT_CLIENT;
     var abapApplicationName = process.env.ABAP_APPLICATION_NAME;
     var abapApplicationDesc = process.env.ABAP_APPLICATION_DESC;
