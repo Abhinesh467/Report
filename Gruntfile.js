@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     // Variables from environment
     var nexusUser = "admin";
     var nexusPassword = "admin";
-    var nexusSnapshotRepoURL = "http://192.168.0.57:8081/#admin/repository/repositories:jenkins-repo";
+    var nexusSnapshotRepoURL = "http://192.168.0.57:8081/repository/jenkins-repo/";
 
     // Project properties
     var webAppDir = "TestReport/WebContent";
