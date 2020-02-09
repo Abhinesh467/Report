@@ -19,6 +19,8 @@
 "scripts": {
   "build": "ui5 build --a",
   "test": "uiveri5",
-  "linting": "eslint ."
+  "linting": "eslint .",  
+"test": "grunt unit_and_integration_tests"
+   
 }
 }
