@@ -1,3 +1,4 @@
+{
 "devDependencies": { 
 },
 
@@ -5,4 +6,5 @@
   "build": "ui5 build --a",
   "test": "uiveri5",
   "linting": "eslint ."
+}
 }
