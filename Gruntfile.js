@@ -197,7 +197,10 @@ module.exports = function(grunt) {
                 src: tmpDir + "/**/*",
                 dest: targetDir + "TestReport"
             }
-        }
+        },
+        watch: {
+       tasks: 'default'
+    }
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -210,7 +213,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-nexus-deployer');
     grunt.loadNpmTasks('grunt-eslint');
 
-    grunt.registerTask('lint', ['clean', 'copy:copyToDbg', 'openui5_preload:preloadDbg', 'copy:copyToTmp',
+    grunt.registerTask('default', ['clean', 'copy:copyToDbg', 'openui5_preload:preloadDbg', 'copy:copyToTmp',
           'uglify:uglifyTmp', 'cssmin', 'openui5_preload:preloadTmp', 'copy:copyDbgToTmp',
           'uglify:uglifyPreload']);
     grunt.registerTask('createZip, ['zip']);
