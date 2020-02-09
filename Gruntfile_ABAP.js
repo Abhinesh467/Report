@@ -153,7 +153,7 @@ module.exports = function(grunt) {
 //             url = jobURL + "/ws/" + this.options().zipFile;
 //         }
 //         else {
-            url = this.options().zipFile;
+            url = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target";
 //         }
         var importParameters = {
             IV_URL: url,
