@@ -143,7 +143,8 @@ module.exports = function(grunt) {
 //                 grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
 //                 return (false);
 //             }
-            transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, { encoding: "utf8" })).REQUESTID;
+//             transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, { encoding: "utf8" })).REQUESTID;
+            transportRequest = "ND5K900040";
         }
         grunt.log.writeln("Transport request:", transportRequest);
         var url = "";
