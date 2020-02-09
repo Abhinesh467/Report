@@ -6,14 +6,14 @@ var fs = require("fs");
 module.exports = function(grunt) {
 
     // Project specific variables
-    var abapDevelopmentUser = process.env.ABAP_DEVELOPMENT_USER;
-    var abapDevelopmentPassword = process.env.ABAP_DEVELOPMENT_PASSWORD;
+    var abapDevelopmentUser = "fathima";
+    var abapDevelopmentPassword = "Ayaan..1";
     var abapDevelopmentServer = "solman:28625";
-    var abapDevelopmentInstance = process.env.ABAP_DEVELOPMENT_INSTANCE;
-    var abapDevelopmentClient = process.env.ABAP_DEVELOPMENT_CLIENT;
-    var abapApplicationName = process.env.ABAP_APPLICATION_NAME;
-    var abapApplicationDesc = process.env.ABAP_APPLICATION_DESC;
-    var abapPackage = process.env.ABAP_PACKAGE;
+    var abapDevelopmentInstance = "10";
+    var abapDevelopmentClient = "800";
+    var abapApplicationName = "ZStackedBar";
+    var abapApplicationDesc = "This is for tesing CI/CD";
+    var abapPackage = "ZFIORI";
     var jobURL = process.env.JOB_URL;
     var nexusSnapshotRepoURL = process.env.NEXUS_SNAPSHOT_REPO;
     var gitCommit = process.env.GIT_COMMIT;
