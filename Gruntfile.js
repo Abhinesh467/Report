@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     var tmpDirDbg = targetDir + "/tmp-dbg";
     var zipFileSuffix = "-opt-static-abap.zip";
     var preloadPrefix = "nw/epm/refapps/ext/shop";
-    var nexusGroupId = "192.168.0.57";
+    var nexusGroupId = "grunt-nexus-deployer";
 
     // Project configuration.
     grunt.initConfig({
