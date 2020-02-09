@@ -2,9 +2,9 @@
 
 module.exports = function(grunt) {
     // Variables from environment
-    var nexusUser = process.env.NEXUS_DEPLOY_USER;
-    var nexusPassword = process.env.NEXUS_DEPLOY_PASSWORD;
-    var nexusSnapshotRepoURL = process.env.NEXUS_SNAPSHOT_REPO;
+    var nexusUser = "admin";
+    var nexusPassword = "admin";
+    var nexusSnapshotRepoURL = "http://192.168.0.57:8081/#admin/repository/repositories:jenkins-repo";
 
     // Project properties
     var webAppDir = "TestReport/WebContent";
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     var tmpDirDbg = targetDir + "/tmp-dbg";
     var zipFileSuffix = "-opt-static-abap.zip";
     var preloadPrefix = "nw/epm/refapps/ext/shop";
-    var nexusGroupId = "com.yourcompany";
+    var nexusGroupId = "192.168.0.57";
 
     // Project configuration.
     grunt.initConfig({
