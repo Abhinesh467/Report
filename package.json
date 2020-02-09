@@ -6,5 +6,5 @@
 "scripts": {
   "build": "ui5 build --a",
   "test": "uiveri5"
-  "linting": "eslint"
+  "linting": "eslint ."
 }
