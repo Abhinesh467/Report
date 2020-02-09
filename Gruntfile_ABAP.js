@@ -82,10 +82,10 @@
 
 								conn: abapConn,
 
-								zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
+// 								zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
 
-								zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") +
-									"/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
+// 								zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") +
+// 									"/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
 
 								codePage: "UTF8"
 
@@ -285,7 +285,7 @@
 
 							// 	if (!(typeof this.options().zipFile === "undefined")) {
 
-									url =  "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target/" + this.options().zipFile;
+									url =  "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target/TestReport";
 
 								// } else {
 
