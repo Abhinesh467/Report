@@ -15,15 +15,15 @@ module.exports = function(grunt) {
     var abapApplicationDesc = "This is for tesing CI/CD";
     var abapPackage = "ZFIORI";
     var transportRequest = "ND5K900040";
-    var jobURL = process.env.JOB_URL;
-    var nexusSnapshotRepoURL = process.env.NEXUS_SNAPSHOT_REPO;
+    var jobURL = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/";
+    var nexusSnapshotRepoURL = "http://192.168.0.57:8081/repository/jenkins-repo/";
     var gitCommit = process.env.GIT_COMMIT;
 
     // Global Variables
     var targetDir = "target";
     var zipFileSuffix = "-opt-static-abap.zip";
     var ctsDataFile = targetDir + "/CTS_Data.txt";
-    var nexusGroupId = "com.yourcompany";
+    var nexusGroupId = "grunt-nexus-deployer";
 
     // Project configuration.
     var abapConn = {
