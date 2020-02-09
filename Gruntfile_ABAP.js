@@ -14,6 +14,7 @@ module.exports = function(grunt) {
     var abapApplicationName = "ZStackedBar";
     var abapApplicationDesc = "This is for tesing CI/CD";
     var abapPackage = "ZFIORI";
+    var transportRequest = "ND5K900040";
     var jobURL = process.env.JOB_URL;
     var nexusSnapshotRepoURL = process.env.NEXUS_SNAPSHOT_REPO;
     var gitCommit = process.env.GIT_COMMIT;
