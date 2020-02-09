@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     var nexusSnapshotRepoURL = process.env.NEXUS_SNAPSHOT_REPO;
 
     // Project properties
-    var webAppDir = "TestReport/WebContent";
+    var webAppDir = "WebContent";
     var targetDir = "target";
     var tmpDir = targetDir + "/tmp";
     var tmpDirDbg = targetDir + "/tmp-dbg";
