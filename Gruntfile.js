@@ -210,7 +210,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-nexus-deployer");
     grunt.loadNpmTasks("grunt-eslint");
 
-    grunt.loadNpmTasks("default", ["clean", "copy:copyToDbg", "openui5_preload:preloadDbg", "copy:copyToTmp",
+    grunt.registerTask("default", ["clean", "copy:copyToDbg", "openui5_preload:preloadDbg", "copy:copyToTmp",
           "uglify:uglifyTmp", "cssmin", "openui5_preload:preloadTmp", "copy:copyDbgToTmp",
           "uglify:uglifyPreload"]);
     grunt.loadNpmTasks("createZip", ["zip"]);
