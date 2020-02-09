@@ -5,6 +5,6 @@
 
 "scripts": {
   "build": "ui5 build --a",
-  "test": "uiveri5",
-  "linting": "eslint. "
+  "test": "uiveri5"
+  "linting": "eslint ."
 }
