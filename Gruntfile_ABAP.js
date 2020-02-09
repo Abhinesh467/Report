@@ -148,7 +148,8 @@ module.exports = function(grunt) {
         }
         grunt.log.writeln("Transport request:", transportRequest);
         var url = "";
-        if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
+//         if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
+        if (!(typeof this.options().zipFile === "undefined")) {
             url = jobURL + "/ws/" + this.options().zipFile;
         }
         else {
