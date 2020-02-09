@@ -153,7 +153,6 @@ module.exports = function(grunt) {
             url ="http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target/" + this.options().zipFile;
         }
         else {
-//             url = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target";
         url = this.options().zipFileURL;
         }
         var importParameters = {
