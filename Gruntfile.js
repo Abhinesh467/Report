@@ -17,8 +17,8 @@ module.exports = function (grunt) {
 		"lint",
 		"build"
 	]);
-	grunt.loadNpmTasks("@sap/grunt-sapui5-bestpractice-test");
-	grunt.registerTask("unit_and_integration_tests", ["test"]);
+// 	grunt.loadNpmTasks("@sap/grunt-sapui5-bestpractice-test");
+// 	grunt.registerTask("unit_and_integration_tests", ["test"]);
 	grunt.config.merge({
 		coverage_threshold: {
 			statements: 0,
