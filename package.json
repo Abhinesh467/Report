@@ -19,14 +19,7 @@
     "grunt-zip": "0.17.1",
     "node-rfc": "0.1.13",
     "@ui5/cli": "1.7.0",
-    "@sap/ui5-builder-webide-extension": "1.0.9"
-  },
-  "scripts": {
-    "build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo"
-  },
-  "ui5": {
-    "dependencies": [
-      "@sap/ui5-builder-webide-extension"
-    ]
+   
   }
+  
 }
