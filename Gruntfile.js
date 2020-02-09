@@ -216,6 +216,6 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['clean', 'copy:copyToDbg', 'openui5_preload:preloadDbg', 'copy:copyToTmp',
           'uglify:uglifyTmp', 'cssmin', 'openui5_preload:preloadTmp', 'copy:copyDbgToTmp',
           'uglify:uglifyPreload']);
-    grunt.registerTask('createZip, ['zip']);
+    grunt.registerTask('createZip', ['zip']);
 //     grunt.registerTask("deployToNexus", ["nexusDeployer"]);
 };
