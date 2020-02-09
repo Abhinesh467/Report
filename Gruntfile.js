@@ -214,5 +214,5 @@ module.exports = function(grunt) {
           "uglify:uglifyTmp", "cssmin", "openui5_preload:preloadTmp", "copy:copyDbgToTmp",
           "uglify:uglifyPreload"]);
     grunt.registerTask("createZip", ["zip"]);
-    grunt.registerTask("deployToNexus", ["nexusDeployer"]);
+//     grunt.registerTask("deployToNexus", ["nexusDeployer"]);
 };
