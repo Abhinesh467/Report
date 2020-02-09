@@ -149,12 +149,12 @@ module.exports = function(grunt) {
         grunt.log.writeln("Transport request:", transportRequest);
         var url = "";
 //         if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
-        if (!(typeof this.options().zipFile === "undefined")) {
-            url = jobURL + "/ws/" + this.options().zipFile;
-        }
-        else {
-            url = this.options().zipFileURL;
-        }
+//         if (!(typeof this.options().zipFile === "undefined")) {
+//             url = jobURL + "/ws/" + this.options().zipFile;
+//         }
+//         else {
+            url = this.options().zipFile;
+//         }
         var importParameters = {
             IV_URL: url,
             IV_SAPUI5_APPLICATION_NAME: abapApplicationName,
