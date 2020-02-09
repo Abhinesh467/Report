@@ -10,14 +10,14 @@
 // };
 module.exports = function (grunt) {
 	"use strict";
-	grunt.loadNpmTasks("@sap/grunt-sapui5-bestpractice-build");
+	grunt.loadNpmTasks("grunt-sapui5-bestpractice-build");
 	grunt.config.merge({ compatVersion: "edge" });
 	grunt.registerTask("default", [
 		"clean",
 		"lint",
 		"build"
 	]);
-	grunt.loadNpmTasks("@sap/grunt-sapui5-bestpractice-test");
+	grunt.loadNpmTasks("grunt-sapui5-bestpractice-test");
 	grunt.registerTask("unit_and_integration_tests", ["test"]);
 	grunt.config.merge({
 		coverage_threshold: {
