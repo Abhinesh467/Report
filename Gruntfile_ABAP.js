@@ -45,8 +45,8 @@ module.exports = function(grunt) {
         uploadToABAP: {
             options: {
                 conn: abapConn,
-                zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
-//                 zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") + "/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
+//                 zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
+                zipFile: targetDir + "/<%= pkg.name %>,
                 codePage: "UTF8"
             }
         },
