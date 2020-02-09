@@ -149,7 +149,7 @@ module.exports = function(grunt) {
         grunt.log.writeln("Transport request:", transportRequest);
         var url = "";
         if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
-        if (!(typeof this.options().zipFile === "undefined")) {
+//         if (!(typeof this.options().zipFile === "undefined")) {
             url ="http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target/" + this.options().zipFile;
         }
         else {
