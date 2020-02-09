@@ -139,10 +139,10 @@ module.exports = function(grunt) {
     grunt.registerTask("uploadToABAP", "Uploads the application to the ABAP System", function(transportRequest) {
         grunt.log.writeln("Uploading to ABAP");
         if (!transportRequest) {
-            if (!fs.existsSync(ctsDataFile)) {
-                grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
-                return (false);
-            }
+//             if (!fs.existsSync(ctsDataFile)) {
+//                 grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
+//                 return (false);
+//             }
             transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, { encoding: "utf8" })).REQUESTID;
         }
         grunt.log.writeln("Transport request:", transportRequest);
