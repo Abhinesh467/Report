@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     // Project specific variables
     var abapDevelopmentUser = "fathima";
     var abapDevelopmentPassword = "Ayaan..1";
-    var abapDevelopmentServer = "192.168.0.57";
+    var abapDevelopmentServer = "http://solman:8010";
     var abapDevelopmentInstance = "10";
     var abapDevelopmentClient = "800";
     var abapApplicationName = "ZStackedBar";
