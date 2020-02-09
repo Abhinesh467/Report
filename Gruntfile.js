@@ -173,24 +173,24 @@ module.exports = function(grunt) {
                 components: true
             }
         },
-        nexusDeployer: {
-            build: {
-                options: {
-                    groupId: nexusGroupId,
-                    artifactId: "<%= pkg.name %>",
-                    version: "<%= pkg.version %>-SNAPSHOT",
-                    packaging: "zip",
-                    auth: {
-                        username: nexusUser,
-                        password: nexusPassword
-                    },
-                    pomDir: targetDir + "/pom",
-                    url: nexusSnapshotRepoURL,
-                    uploadMetadata: false,
-                    artifact: targetDir + "/<%= pkg.name %>" + zipFileSuffix
-                }
-            }
-        },
+//         nexusDeployer: {
+//             build: {
+//                 options: {
+//                     groupId: nexusGroupId,
+//                     artifactId: "<%= pkg.name %>",
+//                     version: "<%= pkg.version %>-SNAPSHOT",
+//                     packaging: "zip",
+//                     auth: {
+//                         username: nexusUser,
+//                         password: nexusPassword
+//                     },
+//                     pomDir: targetDir + "/pom",
+//                     url: nexusSnapshotRepoURL,
+//                     uploadMetadata: false,
+//                     artifact: targetDir + "/<%= pkg.name %>" + zipFileSuffix
+//                 }
+//             }
+//         },
         zip: {
             build: {
                 cwd: tmpDir,
