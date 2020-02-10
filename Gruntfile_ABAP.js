@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 
     var transportRequest = "ND5K900040";
 
-    var jobURL = process.env.JOB_URL;
+    var jobURL = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master";
 
     var nexusSnapshotRepoURL = "http://192.168.0.57:8081/repository/jenkins-repo/";
 
