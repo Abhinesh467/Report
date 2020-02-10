@@ -1,415 +1,424 @@
 "use strict";
 
-var rfc = require("node-rfc");
+			var rfc = require("node-rfc");
 
-var fs = require("fs");
+			var fs = require("fs");
 
-module.exports = function(grunt) {
+			module.exports = function (grunt) {
 
-    // Project specific variables
+					// Project specific variables
 
-    var abapDevelopmentUser = "fathima";
+					var abapDevelopmentUser = "fathima";
 
-    var abapDevelopmentPassword = "Ayaan..1";
+					var abapDevelopmentPassword = "Ayaan..1";
 
-    var abapDevelopmentServer = "192.168.0.57";
+					var abapDevelopmentServer = "192.168.0.57";
 
-    var abapDevelopmentInstance = "10";
+					var abapDevelopmentInstance = "10";
 
-    var abapDevelopmentClient = "800";
+					var abapDevelopmentClient = "800";
 
-    var abapApplicationName = "ZStackedBar";
+					var abapApplicationName = "ZStackedBar";
 
-    var abapApplicationDesc = "This is for tesing CI/CD";
+					var abapApplicationDesc = "This is for tesing CI/CD";
 
-    var abapPackage = "ZFIORI";
+					var abapPackage = "ZFIORI";
 
-    var transportRequest = "ND5K900040";
+					var transportRequest = "ND5K900040";
 
-    var jobURL = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master";
+					var jobURL = process.env.JOB_URL;
 
-    var nexusSnapshotRepoURL = "http://192.168.0.57:8081/repository/jenkins-repo/";
+					var nexusSnapshotRepoURL = "http://192.168.0.57:8081/repository/jenkins-repo/";
 
-    var gitCommit = process.env.GIT_COMMIT;
+					var gitCommit = process.env.GIT_COMMIT;
 
-    // Global Variables
+					// Global Variables
 
-    var targetDir = "target";
+					var targetDir = "target";
 
-    var zipFileSuffix = "-opt-static-abap.zip";
+					var zipFileSuffix = "-opt-static-abap.zip";
 
-    var ctsDataFile = targetDir + "/CTS_Data.txt";
+					var ctsDataFile = targetDir + "/CTS_Data.txt";
 
-    var nexusGroupId = "grunt-nexus-deployer";
+					var nexusGroupId = "grunt-nexus-deployer";
 
-    // Project configuration.
+					// Project configuration.
 
-    var abapConn = {
+					var abapConn = {
 
-        user: abapDevelopmentUser,
+						user: abapDevelopmentUser,
 
-        passwd: abapDevelopmentPassword,
+						passwd: abapDevelopmentPassword,
 
-        ashost: abapDevelopmentServer,
+						ashost: abapDevelopmentServer,
 
-        sysnr: abapDevelopmentInstance,
+						sysnr: abapDevelopmentInstance,
 
-        client: abapDevelopmentClient
+						client: abapDevelopmentClient
 
-    };
+					};
 
-    grunt.initConfig({
+					grunt.initConfig({
 
-        pkg: grunt.file.readJSON("package.json"),
+						pkg: grunt.file.readJSON("package.json"),
 
-        createTransportRequest: {
+						createTransportRequest: {
 
-            options: {
+							options: {
 
-                conn: abapConn,
+								conn: abapConn,
 
-                author: abapDevelopmentUser,
+								author: abapDevelopmentUser,
 
-                description: "Commit: " + gitCommit
+								description: "Commit: " + gitCommit
 
-            }
+							}
 
-        },
+						},
 
-        uploadToABAP: {
+						uploadToABAP: {
 
-            options: {
+							options: {
 
-                conn: abapConn,
+								conn: abapConn,
 
-                zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
+								zipFile: targetDir + "/<%= pkg.name %>" + zipFileSuffix,
 
-                // 								zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") +
-                // 									"/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
+// 								zipFileURL: nexusSnapshotRepoURL + "/" + nexusGroupId.replace(/\./g, "/") +
+// 									"/<%= pkg.name %>/<%= pkg.version %>-SNAPSHOT/<%= pkg.name %>-<%= pkg.version %>-SNAPSHOT.zip",
 
-                codePage: "UTF8"
+								codePage: "UTF8"
 
-            }
+							}
 
-        },
+						},
 
-        releaseTransport: {
+						releaseTransport: {
 
-            options: {
+							options: {
 
-                conn: abapConn
+								conn: abapConn
 
-            }
+							}
 
-        }
+						}
 
-    });
+					});
 
-    var rfcConnect = function(functionModule, importParameters, gruntContext) {
+					var rfcConnect = function (functionModule, importParameters, gruntContext) {
 
-        return new Promise(function(resolve, reject) {
+						return new Promise(function (resolve, reject) {
 
-            var conn = gruntContext.options().conn;
+							var conn = gruntContext.options().conn;
 
-            var client = new rfc.Client(conn);
+							var client = new rfc.Client(conn);
 
-            grunt.log.writeln("RFC client lib version:", client.getVersion());
+							grunt.log.writeln("RFC client lib version:", client.getVersion());
 
-            client.connect(function(err) {
+							client.connect(function (err) {
 
-                if (err) { // check for login/connection errors
+								if (err) { // check for login/connection errors
 
-                    grunt.log.errorlns("could not connect to server", err);
+									grunt.log.errorlns("could not connect to server", err);
 
-                    return reject();
+									return reject();
 
-                }
+								}
 
-                // invoke remote enabled ABAP function module
+								// invoke remote enabled ABAP function module
 
-                grunt.log.writeln("Invoking function module", functionModule);
+								grunt.log.writeln("Invoking function module", functionModule);
 
-                client.invoke(functionModule,
+								client.invoke(functionModule,
 
-                    importParameters,
+									importParameters,
 
-                    function(err, res) {
+									function (err, res) {
 
-                        if (err) { // check for errors (e.g. wrong parameters)
+										if (err) { // check for errors (e.g. wrong parameters)
 
-                            grunt.log.errorlns("Error invoking", functionModule, err);
+											grunt.log.errorlns("Error invoking", functionModule, err);
 
-                            return reject();
+											return reject();
 
-                        }
+										}
 
-                        client.close();
+										client.close();
 
-                        grunt.log.writeln("Messages:", res.EV_LOG_MESSAGES);
+										grunt.log.writeln("Messages:", res.EV_LOG_MESSAGES);
 
-                        return resolve(res);
+										return resolve(res);
 
-                    });
+									});
 
-            });
+							});
 
-        });
+						});
 
-    };
+					};
 
-    grunt.registerTask("createTransportRequest", "Creates an ABAP Transport Request", function() {
+					grunt.registerTask("createTransportRequest", "Creates an ABAP Transport Request", function () {
 
-        grunt.log.writeln("Creating Transport Request");
+						grunt.log.writeln("Creating Transport Request");
 
-        var importParameters = {
+						var importParameters = {
 
-            AUTHOR: this.options().author,
+							AUTHOR: this.options().author,
 
-            TEXT: this.options().description
+							TEXT: this.options().description
 
-        };
+						};
 
-        var done = this.async();
+						var done = this.async();
 
-        rfcConnect("BAPI_CTREQUEST_CREATE", importParameters, this)
+						rfcConnect("BAPI_CTREQUEST_CREATE", importParameters, this)
 
-            .then(
+						.then(
 
-                function(returnValue) {
+							function (returnValue) {
 
-                    if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
+								if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
 
-                        grunt.log.errorlns("Error invoking BAPI_CTREQUEST_CREATE.");
+									grunt.log.errorlns("Error invoking BAPI_CTREQUEST_CREATE.");
 
-                        grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
+									grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
 
-                        grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
+									grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
 
-                        grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
+									grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
 
-                        done(false);
+									done(false);
 
-                        return;
+									return;
 
-                    }
+								}
 
-                    if (returnValue.REQUESTID == "") {
+								if (returnValue.REQUESTID == "") {
 
-                        grunt.log.errorlns("Error invoking BAPI_CTREQUEST_CREATE.");
+									grunt.log.errorlns("Error invoking BAPI_CTREQUEST_CREATE.");
 
-                        grunt.log.errorlns("Transport request could not be created.");
+									grunt.log.errorlns("Transport request could not be created.");
 
-                        grunt.log.errorlns(returnValue.RETURN.MESSAGE);
+									grunt.log.errorlns(returnValue.RETURN.MESSAGE);
 
-                        done(false);
+									done(false);
 
-                        return;
+									return;
 
-                    }
+								}
 
-                    grunt.log.writeln("Transport request", returnValue.REQUESTID, "created.");
+								grunt.log.writeln("Transport request", returnValue.REQUESTID, "created.");
 
-                    if (fs.existsSync(targetDir) === false) {
+								if (fs.existsSync(targetDir) === false) {
 
-                        fs.mkdirSync(targetDir);
+									fs.mkdirSync(targetDir);
 
-                    }
+								}
 
-                    fs.writeFile(ctsDataFile,
+								fs.writeFile(ctsDataFile,
 
-                        JSON.stringify(
+									JSON.stringify(
 
-                            {
-                                REQUESTID: returnValue.REQUESTID
-                            }
+										{
+											REQUESTID: returnValue.REQUESTID
+										}
 
-                        ),
+									),
 
-                        function(err) {
+									function (err) {
 
-                            if (err) {
+										if (err) {
 
-                                grunt.log.errorlns("Error Creating file:", err);
+											grunt.log.errorlns("Error Creating file:", err);
 
-                                done(false);
+											done(false);
 
-                                return;
+											return;
 
-                            }
+										}
 
-                            grunt.log.writeln("Created file:", ctsDataFile);
+										grunt.log.writeln("Created file:", ctsDataFile);
 
-                            done();
+										done();
 
-                        }
+									}
 
-                    )
+								)
 
-                },
+							},
 
-                function() {
+							function () {
 
-                    done(false);
+								done(false);
 
-                });
+							});
 
-    });
+					});
 
-    grunt.registerTask("uploadToABAP", "Uploads the application to the ABAP System", function(transportRequest) {
+					grunt.registerTask("uploadToABAP", "Uploads the application to the ABAP System", function (transportRequest) {
 
-        grunt.log.writeln("Uploading to ABAP");
+							grunt.log.writeln("Uploading to ABAP");
 
-        if (!transportRequest) {
+							if (!transportRequest) {
 
-            //             if (!fs.existsSync(ctsDataFile)) {
+								//             if (!fs.existsSync(ctsDataFile)) {
 
-            //                 grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
+								//                 grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
 
-            //                 return (false);
+								//                 return (false);
 
-            //             }
+								//             }
 
-            //             transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, { encoding: "utf8" })).REQUESTID;
+								//             transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, { encoding: "utf8" })).REQUESTID;
 
-            transportRequest = "ND5K900040";
+								transportRequest = "ND5K900040";
 
-        }
+							}
 
-        grunt.log.writeln("Transport request:", transportRequest);
+							grunt.log.writeln("Transport request:", transportRequest);
 
-        var url = "";
-        if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
-            url = jobURL + "/ws/" + this.options().zipFile;
-        } else {
-            url = this.options().zipFileURL;
-        }
+var url = "";
 
-        var importParameters = {
+// if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
 
-            IV_URL: url,
+// 	//         if (!(typeof this.options().zipFile === "undefined") && fs.existsSync(this.options().zipFile)) {
 
-            IV_SAPUI5_APPLICATION_NAME: abapApplicationName,
+// 	if (!(typeof this.options().zipFile === "undefined")) {
 
-            IV_SAPUI5_APPLICATION_DESC: abapApplicationDesc,
+url = "http://192.168.0.57:8080/job/CI_nw.epm.refapps.ext.shop_master/ws/target/TestReport-opt-static-abap.zip";
 
-            IV_PACKAGE: abapPackage,
+// } else {
 
-            IV_WORKBENCH_REQUEST: transportRequest,
+// 	url = this.options().zipFileURL;
 
-            IV_TEST_MODE: "-",
+// }
 
-            IV_EXTERNAL_CODE_PAGE: this.options().codePage
+								var importParameters = {
 
-        };
+									IV_URL: url,
 
-        var done = this.async();
+									IV_SAPUI5_APPLICATION_NAME: abapApplicationName,
 
-        grunt.log.writeln("Uploading application from", url);
+									IV_SAPUI5_APPLICATION_DESC: abapApplicationDesc,
 
-        rfcConnect("/UI5/UI5_REPOSITORY_LOAD_HTTP", importParameters, this)
+									IV_PACKAGE: abapPackage,
 
-            .then(
+									IV_WORKBENCH_REQUEST: transportRequest,
 
-                function(returnValue) {
+									IV_TEST_MODE: "-",
 
-                    if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
+									IV_EXTERNAL_CODE_PAGE: this.options().codePage
 
-                        grunt.log.errorlns("Error invoking", "/UI5/UI5_REPOSITORY_LOAD_HTTP");
+								};
 
-                        grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
+								var done = this.async();
 
-                        grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
+								grunt.log.writeln("Uploading application from", url);
 
-                        grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
+								rfcConnect("/UI5/UI5_REPOSITORY_LOAD_HTTP", importParameters, this)
 
-                        done(false);
+								.then(
 
-                        return;
+									function (returnValue) {
 
-                    }
+										if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
 
-                    grunt.log.writeln("Application uploaded.");
+											grunt.log.errorlns("Error invoking", "/UI5/UI5_REPOSITORY_LOAD_HTTP");
 
-                    done();
+											grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
 
-                },
+											grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
 
-                function() {
+											grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
 
-                    done(false);
+											done(false);
 
-                });
+											return;
 
-    });
+										}
 
-    grunt.registerTask("releaseTransport", "Releases an ABAP Transport Request", function(transportRequest) {
+										grunt.log.writeln("Application uploaded.");
 
-        grunt.log.writeln("Releasing Transport Request");
+										done();
 
-        if (!transportRequest) {
+									},
 
-            if (!fs.existsSync(ctsDataFile)) {
+									function () {
 
-                grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
+										done(false);
 
-                return (false);
+									});
 
-            }
+							});
 
-            transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, {
-                encoding: "utf8"
-            })).REQUESTID;
+						grunt.registerTask("releaseTransport", "Releases an ABAP Transport Request", function (transportRequest) {
 
-        }
+							grunt.log.writeln("Releasing Transport Request");
 
-        grunt.log.writeln("Transport request:", transportRequest);
+							if (!transportRequest) {
 
-        var importParameters = {
+								if (!fs.existsSync(ctsDataFile)) {
 
-            REQUESTID: transportRequest,
+									grunt.log.errorlns("No Transport request specified. Pass one explicitly or run createTransportRequest first.");
 
-            COMPLETE: "X",
+									return (false);
 
-            BATCH_MODE: "X"
+								}
 
-        }
+								transportRequest = JSON.parse(fs.readFileSync(ctsDataFile, {
+									encoding: "utf8"
+								})).REQUESTID;
 
-        var done = this.async();
+							}
 
-        rfcConnect("BAPI_CTREQUEST_RELEASE", importParameters, this)
+							grunt.log.writeln("Transport request:", transportRequest);
 
-            .then(
+							var importParameters = {
 
-                function(returnValue) {
+								REQUESTID: transportRequest,
 
-                    if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
+								COMPLETE: "X",
 
-                        grunt.log.errorlns("Error invoking", "BAPI_CTREQUEST_RELEASE");
+								BATCH_MODE: "X"
 
-                        grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
+							}
 
-                        grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
+							var done = this.async();
 
-                        grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
+							rfcConnect("BAPI_CTREQUEST_RELEASE", importParameters, this)
 
-                        done(false);
+							.then(
 
-                        return;
+								function (returnValue) {
 
-                    }
+									if (returnValue.EV_SUCCESS == "E" || returnValue.EV_SUCCESS == "W") {
 
-                    grunt.log.writeln("Transport request released.");
+										grunt.log.errorlns("Error invoking", "BAPI_CTREQUEST_RELEASE");
 
-                    done();
+										grunt.log.errorlns("Message Id:", returnValue.EV_MSG_ID);
 
-                },
+										grunt.log.errorlns("Message No:", returnValue.EV_MSG_NO);
 
-                function() {
+										grunt.log.errorlns("Messages:", returnValue.EV_LOG_MESSAGES);
 
-                    done(false);
+										done(false);
 
-                });
+										return;
 
-    });
+									}
 
-}
+									grunt.log.writeln("Transport request released.");
+
+									done();
+
+								},
+
+								function () {
+
+									done(false);
+
+								});
+
+						});
+
+					}
