@@ -195,7 +195,7 @@ module.exports = function(grunt) {
             build: {
                 cwd: tmpDir,
                 src: tmpDir + "/**/*",
-                dest: targetDir + "TestReport"
+                dest: targetDir + "/<%= pkg.name %>" + zipFileSuffix
             }
         },
         watch: {
